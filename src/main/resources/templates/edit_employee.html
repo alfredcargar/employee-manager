@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item active">
+            <a class="nav-link" th:href="@{/employees}">Employee Manager</a>
+        </li>
+
+    </ul>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+            <h1 class="text-center">Edit Employee</h1>
+            <div class="card-body">
+                <form th:action="@{/employees/{id}(id=${employee.ID})}" th:object = "${employee}" method="POST">
+                    <div class="form-group">
+                        <label>Department</label>
+                        <input class="form-control"
+                               type="text" name="department"
+                               th:field="*{department}" placeholder="Enter department...">
+                        <label>Employee Name</label>
+                        <input class="form-control"
+                               type="text" name="name"
+                               th:field="*{name}" placeholder="Enter employee's name..."/>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee Surname</label>
+                        <input class="form-control"
+                               type="text" name="surname"
+                               th:field="*{surname}" placeholder="Enter employee's surname..."/>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee Email</label>
+                        <input class="form-control"
+                               type="text" name="email"
+                               th:field="*{email}" placeholder="Email..."/>
+                    </div>
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
