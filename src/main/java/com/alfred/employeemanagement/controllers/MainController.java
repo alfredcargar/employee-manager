@@ -1,6 +1,6 @@
 package com.alfred.employeemanagement.controllers;
 
-import com.alfred.employeemanagement.entities.Employee;
+import com.alfred.employeemanagement.models.Employee;
 import com.alfred.employeemanagement.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,13 +20,13 @@ public class MainController {
     @GetMapping("/home")
     public String home(Model model){
         listEmployees(model);
-        return "index";
+        return "index.html";
     }
 
     // login handler
     @GetMapping("/login")
     public String login() {
-        return "login";
+        return "login.html";
     }
 
     /**

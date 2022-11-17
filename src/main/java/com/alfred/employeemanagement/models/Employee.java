@@ -1,4 +1,4 @@
-package com.alfred.employeemanagement.entities;
+package com.alfred.employeemanagement.models;
 
 import javax.persistence.*;
 

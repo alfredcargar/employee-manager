@@ -1,6 +1,6 @@
 package com.alfred.employeemanagement.services;
 
-import com.alfred.employeemanagement.entities.Employee;
+import com.alfred.employeemanagement.models.Employee;
 import com.alfred.employeemanagement.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
