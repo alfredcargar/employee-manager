@@ -20,7 +20,7 @@
         <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
             <h1 class="text-center">Edit Employee</h1>
             <div class="card-body">
-                <form th:action="@{/employees/{id}(id=${employee.ID})}" th:object = "${employee}" method="POST">
+                <form th:action="@{/employees/id={id}(id=${employee.ID})}" th:object = "${employee}" method="POST">
                     <div class="form-group">
                         <label>Department</label>
                         <input class="form-control"

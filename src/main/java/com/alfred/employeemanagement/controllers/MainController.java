@@ -17,27 +17,24 @@ public class MainController {
     }
 
     // handler for home
-    @GetMapping("/home")
+    @GetMapping("/")
     public String home(Model model){
-        listEmployees(model);
         return "index.html";
     }
 
-    // login handler
-    @GetMapping("/login")
-    public String login() {
-        return "login.html";
+    /* ****************************************************************************************************************
+                                                    ADMIN HANDLERS
+     * ****************************************************************************************************************/
+
+    @GetMapping("/admin/login")
+    public String adminLogin() {
+        return "/admin/admin_login";
     }
 
-    /**
-     * handler method to return a view of the list of Entities
-     * @param model
-     * @return view of the home page
-     */
-    @GetMapping("/employees")
-    public String listEmployees(Model model) {
+    @GetMapping("/admin/employees")
+    public String adminHome(Model model) {
         model.addAttribute("employees", employeeService.getAllEmployees());
-        return "employees.html";
+        return "/admin/employees";
     }
 
     @GetMapping("/employees/new")
@@ -46,26 +43,25 @@ public class MainController {
         // create obj to hold the form data
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
-        return "create_employee.html";
+        return "/admin/create_employee";
     }
 
-    // handler for the POST of new students
+    // handler for the POST of new entities
     @PostMapping("/employees")
     public String addEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.addEmployee(employee);
-        return "redirect:/employees";
+        return "redirect:/admin/employees";
     }
 
-
     // handler to return the edit form
-    @GetMapping("/employees/edit/{ID}")
+    @GetMapping("/employees/edit/id={ID}")
     public String editEmployeeForm(@PathVariable Long ID, Model model) {
         model.addAttribute("employee", employeeService.getEmployeeById(ID));
-        return "edit_employee";
+        return "/admin/edit_employee";
     }
 
     // handler for the edit update
-    @PostMapping("/employees/{ID}")
+    @PostMapping("/employees/id={ID}")
     public String updateEmployee(@PathVariable Long ID,
                                  @ModelAttribute("employee") Employee employee,
                                  Model model){
@@ -79,7 +75,7 @@ public class MainController {
 
         employeeService.editEmployee(employee);
 
-        return "redirect:/employees";
+        return "redirect:/admin/employees";
     }
 
     // delete handler
@@ -88,6 +84,27 @@ public class MainController {
 
         employeeService.deleteEmployee(ID);
         return "redirect:/employees";
+    }
+
+    /* ****************************************************************************************************************
+                                                    USER HANDLERS
+     * ****************************************************************************************************************/
+
+
+    @GetMapping("/user/login")
+    public String userLogin() {
+        return "/user/user_login";
+    }
+
+    @GetMapping("/user/employees")
+    public String userHome(Model model) {
+        model.addAttribute("employees", employeeService.getAllEmployees());
+        return "user/employees";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "index.html";
     }
 
 

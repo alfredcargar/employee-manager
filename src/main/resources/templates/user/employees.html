@@ -10,13 +10,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!--TODO: calling a js function from external file doesn't work-->
-    <script  th:inline="javascript">
-    function confirmDelete() {
-        confirm('Are you sure you want to delete the selected employee?')
-    }
-    </script>
-
 </head>
 <body>
 
@@ -30,13 +23,12 @@
             <li class="active"><a th:href="@{/employees}">Home</a></li>
             <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a th:href="@{/employees/new}">Create</a></li>
-<!--                    <li><a th:href="@{/employees/{id}}">Delete</a></li>-->
+<!--                    some user functionality-->
                 </ul>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><h3 th:inline="text">Hi, [[${#httpServletRequest.remoteUser}]]!</h3></li>
+            <li><a th:inline="text">You are logged in as: [[${#request.userPrincipal.principal.username}]]</a></li>
             <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
         </ul>
     </div>
@@ -68,14 +60,7 @@
             <td th:text="${e.surname}"></td>
             <td th:text="${e.email}"></td>
             <td>
-                <div>
-                    <a style="margin: 0px 10px 0px 10px"
-                       th:href="@{/employees/edit/{id}(id=${e.ID})}">Edit</a>
 
-                    <a style="margin: 0px 10px 0px 10px"
-                       th:href="@{/employees/{id}(id=${e.ID})}"
-                       th:onclick="if(!(confirm('Are you sure you want to delete this employee ?') )) return false">Delete</a>
-                </div>
             </td>
         </tr>
         </tbody>

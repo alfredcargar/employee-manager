@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Manager</title>
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"-->
+<!--          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!--TODO: calling a js function from external file doesn't work-->
+    <script  th:inline="javascript">
+    function confirmDelete() {
+        confirm('Are you sure you want to delete the selected employee?')
+    }
+    </script>
+
+</head>
+<body>
+
+<!--Navbar-->
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Employee Manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a th:href="@{/employees}">Home</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a th:href="@{/employees/new}">Create</a></li>
+<!--                    <li><a th:href="@{/employees/{id}}">Delete</a></li>-->
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a th:inline="text">You are logged in as: [[${#request.userPrincipal.principal.username}]]</a></li>
+            <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-in"></span>Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+<!--Title-->
+    <div class="row">
+        <h1>Employees</h1>
+    </div>
+    <table style="margin-top: 20px"
+           class="table table-condensed">
+
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Department</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+        </tr>
+        </thead>
+<!--The variable names must correspond to the Entity bean        -->
+        <tbody>
+        <tr th:each="e: ${employees}">
+            <td th:text="${e.ID}"></td>
+            <td th:text="${e.department}"></td>
+            <td th:text="${e.name}"></td>
+            <td th:text="${e.surname}"></td>
+            <td th:text="${e.email}"></td>
+            <td>
+                <div>
+                    <a style="margin: 0px 10px 0px 10px"
+                       th:href="@{/employees/edit/id={id}(id=${e.ID})}">Edit</a>
+
+                    <a style="margin: 0px 10px 0px 10px"
+                       th:href="@{/employees/id={id}(id=${e.ID})}"
+                       th:onclick="if(!(confirm('Are you sure you want to delete this employee ?') )) return false">Delete</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>
