@@ -4,7 +4,10 @@ import com.alfred.employeemanagement.models.Employee;
 import com.alfred.employeemanagement.services.MainService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MainController {
@@ -12,13 +15,12 @@ public class MainController {
     private MainService employeeService;
 
     public MainController(MainService employeeService) {
-        super();
         this.employeeService = employeeService;
     }
 
     // handler for home
     @GetMapping("/")
-    public String home(Model model){
+    public String home(Model model) {
         return "index.html";
     }
 
@@ -54,17 +56,17 @@ public class MainController {
     }
 
     // handler to return the edit form
-    @GetMapping("/employees/edit/id={ID}")
+    @GetMapping("/employees/edit/{ID}")
     public String editEmployeeForm(@PathVariable Long ID, Model model) {
         model.addAttribute("employee", employeeService.getEmployeeById(ID));
         return "/admin/edit_employee";
     }
 
     // handler for the edit update
-    @PostMapping("/employees/id={ID}")
+    @PostMapping("/employees/{ID}")
     public String updateEmployee(@PathVariable Long ID,
                                  @ModelAttribute("employee") Employee employee,
-                                 Model model){
+                                 Model model) {
 
         Employee existing = employeeService.getEmployeeById(ID);
         existing.setID(ID);
@@ -80,10 +82,10 @@ public class MainController {
 
     // delete handler
     @GetMapping("/employees/{ID}")
-    public String deleteEmployee(@PathVariable Long ID){
+    public String deleteEmployee(@PathVariable Long ID) {
 
         employeeService.deleteEmployee(ID);
-        return "redirect:/employees";
+        return "redirect:/admin/employees";
     }
 
     /* ****************************************************************************************************************
@@ -106,7 +108,6 @@ public class MainController {
     public String logout() {
         return "index.html";
     }
-
 
 
 }

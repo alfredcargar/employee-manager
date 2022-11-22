@@ -59,7 +59,7 @@
             <th>Email</th>
         </tr>
         </thead>
-<!--The variable names must correspond to the Entity bean        -->
+<!--The variable names must correspond to the Entity bean-->
         <tbody>
         <tr th:each="e: ${employees}">
             <td th:text="${e.ID}"></td>
@@ -70,10 +70,10 @@
             <td>
                 <div>
                     <a style="margin: 0px 10px 0px 10px"
-                       th:href="@{/employees/edit/id={id}(id=${e.ID})}">Edit</a>
+                       th:href="@{/employees/edit/{id}(id=${e.ID})}">Edit</a>
 
                     <a style="margin: 0px 10px 0px 10px"
-                       th:href="@{/employees/id={id}(id=${e.ID})}"
+                       th:href="@{/employees/{id}(id=${e.ID})}"
                        th:onclick="if(!(confirm('Are you sure you want to delete this employee ?') )) return false">Delete</a>
                 </div>
             </td>

@@ -12,6 +12,7 @@ public class User {
 
     @Column(nullable = false, unique = true)
     private String username;
+
     @Column(nullable = false, length = 10)
     private String password;
 
@@ -29,6 +30,13 @@ public class User {
     }
 
 
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getUsername() {
         return username;

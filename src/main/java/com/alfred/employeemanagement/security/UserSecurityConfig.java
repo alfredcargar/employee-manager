@@ -1,11 +1,9 @@
 package com.alfred.employeemanagement.security;
 
-import com.alfred.employeemanagement.services.ApplicationUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -14,6 +12,8 @@ public class UserSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChainUser(HttpSecurity http) throws Exception{
+
+        http.authorizeRequests().antMatchers("/user/registration").permitAll();
 
         http.antMatcher("/user/**")
                 .authorizeRequests().anyRequest().hasAuthority("USER")
