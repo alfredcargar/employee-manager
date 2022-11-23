@@ -3,10 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="href=https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Employee Manager</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li class="active"><a th:href="@{/}">Home</a></li>
+        </ul>
+    </div>
+</nav>
+
+<br>
+<br>
+<br>
 
 <!--registration form-->
 <div class="container">
@@ -15,11 +33,10 @@
 
             <!-- success message -->
             <div th:if="${param.success}">
-                <div class="alert alert-info">You've successfully registered
-                    to our awesome app!</div>
+                <div class="alert alert-info">Registration successful!</div>
             </div>
 
-            <h1>Registration</h1>
+            <h1>New User</h1>
 
             <form th:action="@{/user/registration}" method="post" th:object="${user}">
                 <div class="form-group">
@@ -34,10 +51,18 @@
                         th:field="*{password}" required autofocus="autofocus" />
                 </div>
 
+                <br>
+                <br>
+
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success">Register</button>
-                    <span>Already registered? <a href="/" th:href="@{/user/login}">Login
-								here</a></span>
+                    <button style="display: block; margin-left: auto; margin-right: auto;"
+                            type="submit" class="btn btn-success">Register</button>
+                    <br>
+                    <div style="margin: auto; text-align: center;">
+                        <span>Already registered?
+                            <a href="/" th:href="@{/user/login}">Login here</a>
+                        </span>
+                    </div>
                 </div>
             </form>
         </div>
